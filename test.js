@@ -37,7 +37,7 @@ function modWindow() {
     win.style.boxShadow = "0 0 15px rgba(0,0,0,0.5)";
     win.style.fontFamily = "Arial, sans-serif";
     win.style.cursor = "move";
-    win.innerHTML = "<b>Mod Window</b><br><small>By XPDevs</small><br><p id='modStatus' style='color: red;'>Mod: false</p>";
+    win.innerHTML = "<b>Mod Window</b><small> V1.4.0</small><br><small>By XPDevs</small><br><p id='modStatus' style='color: red;'>Mod: false</p>";
     document.body.appendChild(win);
 
     // Dragging functionality
@@ -61,32 +61,47 @@ function modWindow() {
     });
   }
 
-  // Object to track previous states of D-pad buttons
-  let prevButtonStates = {
-    12: false, // D-pad up
-    13: false, // D-pad down
-    14: false, // D-pad left
-    15: false, // D-pad right
+  // Object to track joystick movement
+  let joystickState = {
+    x: 0, // Left joystick X-axis (left-right)
+    y: 0, // Left joystick Y-axis (up-down)
   };
 
-  // Function to handle the D-pad input
-  function handleDPadInput(gamepad) {
-    handleDPadDirection(gamepad, 12, "w");
-    handleDPadDirection(gamepad, 13, "s");
-    handleDPadDirection(gamepad, 14, "a");
-    handleDPadDirection(gamepad, 15, "d");
-  }
+  // Function to handle joystick input (left joystick movement)
+  function handleJoystickInput(gamepad) {
+    // Joystick axes are usually at indices 0 (left-right) and 1 (up-down)
+    const xAxis = gamepad.axes[0]; // Left joystick X-axis (left-right)
+    const yAxis = gamepad.axes[1]; // Left joystick Y-axis (up-down)
 
-  // Helper function to handle individual D-pad directions
-  function handleDPadDirection(gamepad, buttonIndex, key) {
-    const buttonState = gamepad.buttons[buttonIndex].pressed;
-    if (buttonState && !prevButtonStates[buttonIndex]) {
-      simulateKeyPress(key); // Simulate key press when button is first pressed
-    } 
-    if (!buttonState && prevButtonStates[buttonIndex]) {
-      stopKeyPress(key); // Stop key press when the button is released
+    // Update joystick state
+    joystickState.x = xAxis;
+    joystickState.y = yAxis;
+
+    // Map joystick movement to keyboard keys (W, A, S, D)
+    // Horizontal movement (left-right)
+    if (xAxis < -0.5) {
+      simulateKeyPress("a"); // Left movement
+    } else if (xAxis > 0.5) {
+      simulateKeyPress("d"); // Right movement
     }
-    prevButtonStates[buttonIndex] = buttonState; // Update button state
+
+    // Vertical movement (up-down)
+    if (yAxis < -0.5) {
+      simulateKeyPress("w"); // Up movement
+    } else if (yAxis > 0.5) {
+      simulateKeyPress("s"); // Down movement
+    }
+
+    // If joystick is near the center, stop key presses
+    if (Math.abs(xAxis) < 0.5) {
+      stopKeyPress("a");
+      stopKeyPress("d");
+    }
+
+    if (Math.abs(yAxis) < 0.5) {
+      stopKeyPress("w");
+      stopKeyPress("s");
+    }
   }
 
   // Function to simulate key press events
@@ -129,13 +144,13 @@ function modWindow() {
     return keyCodes[key] || 0;
   }
 
-  // Function to continuously monitor the gamepad input for D-pad events
+  // Function to continuously monitor the gamepad input for joystick events
   function handleGamepadInput() {
     const gamepads = navigator.getGamepads ? navigator.getGamepads() : [];
 
     if (gamepads[0]) {
       const gamepad = gamepads[0];
-      handleDPadInput(gamepad); // Call the function to handle D-pad input
+      handleJoystickInput(gamepad); // Handle joystick input
     }
 
     // Re-run the function to continuously monitor the gamepad input
@@ -162,8 +177,8 @@ function modWindow() {
       if (gamepadIndex !== null) {
         const gamepad = navigator.getGamepads()[gamepadIndex];
 
-        // Handle D-pad input
-        handleDPadInput(gamepad);
+        // Handle joystick input
+        handleJoystickInput(gamepad);
 
         // Check if any button is pressed
         for (let i = 0; i < gamepad.buttons.length; i++) {
