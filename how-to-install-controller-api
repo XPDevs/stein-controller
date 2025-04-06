@@ -1,0 +1,22 @@
+use this command inside of the console of the stein game window and it wll run the API
+
+fetch('https://xpdevs.github.io/stein-controller/test.js')
+  .then(response => response.text())
+  .then(code => {
+    eval(code);
+  })
+  .catch(err => console.error('Error loading script:', err));
+
+
+after running it, please press the top left trigger only and it should show a windows with a loading bar saying that its installing the mode please leave it alone and install 
+
+WARNINGS:
+
+EVERYTIME YOU WANT TO RUN YOOUR GAME AND HAVE CONTROLLER SUPPORT YOU HAVE TO RE-RUN THE COMMAND IF YOU HAVE IT INSTALLED BUT ITS MESSING ABOUT GO TO THE SETTIGN PAGE 
+AND CLICK RESTART THIS WILL STOP THE API AND ANY INPUTS AND THEN REANBLE THEM.
+
+  I AM ABSOLOTLEY NOT RESPOSIBLE TO ANY GAME DATA YOU MAY LOSE DURING THE USE OF THIS PROJECT, THIS IS PURLEY EXPERIMENTAL.
+
+  COPYRIGHTS RESERVED TO THE GAME CREATOR/OWNER ALL RIGHTS RESERVED.
+
+  COPYRIGHTS RESERVED TO XPDevs FOR THE CONTROLLER API
