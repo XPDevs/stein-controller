@@ -15,3 +15,5 @@ button remaping
 deadzone configuration
 controller vibration feedback (if supported)
 quick hotbar access
+
+### File: `how-to-install-controller-api`
