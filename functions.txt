@@ -1,0 +1,19 @@
+Index	Button	Common Name	Purpose / Usage
+0	A	Button	Confirm / Jump / Select	Primary action
+1	B	Button	Cancel / Back / Roll	Secondary action
+2	X	Button	Reload / Interact	Tertiary action
+3	Y	Button	Switch weapon / Interact	Extra action
+4	Left Bumper	LB / L1	Shoulder action
+5	Right Bumper	RB / R1	Shoulder action
+6	Left Trigger	LT / L2 (Analog)	Aim / Modifier
+7	Right Trigger	RT / R2 (Analog)	Fire / Accelerate
+8	Back	Select / Menu	Open menu / Pause
+9	Start	Start	Confirm / Resume
+10	Left Stick Click	L3	Sprint / Toggle
+11	Right Stick Click	R3	Melee / Zoom
+12	D-Pad Up		Navigation
+13	D-Pad Down		Navigation
+14	D-Pad Left		Navigation
+15	D-Pad Right		Navigation
+16	Xbox / Guide	Home	System menu (not always accessible)
+

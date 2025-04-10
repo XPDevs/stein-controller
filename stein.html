@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Move Circle with Letters and Numbers</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            overflow: hidden;
+        }
+        
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #3498db;
+            position: absolute;
+            transition: all 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+
+<div class="circle" id="circle"></div>
+
+<script>
+    const circle = document.getElementById('circle');
+    let posX = 70;
+    let posY = 70;
+
+    function moveCircle(event) {
+        const step = 10; // How far the circle moves per key press
+        const key = event.key.toLowerCase(); // Convert to lowercase for simplicity
+
+        // Check if the key is one of the movement keys (WASD)
+        switch(key) {
+            case 'w': // Move up
+                posY -= step;
+                break;
+            case 'a': // Move left
+                posX -= step;
+                break;
+            case 's': // Move down
+                posY += step;
+                break;
+            case 'd': // Move right
+                posX += step;
+                break;
+            default:
+                // For all other keys, show an alert
+                alert(`${event.key} was pressed`);
+                return; // Exit the function so the circle doesn't move
+        }
+
+        // Update the position of the circle
+        circle.style.left = posX + 'px';
+        circle.style.top = posY + 'px';
+    }
+
+    // Listen for keydown events
+    window.addEventListener('keydown', moveCircle);
+</script>
+<script src="stein.world"></script>
+</body>
+</html>
+
